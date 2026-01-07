@@ -74,7 +74,6 @@ mvn test
 # Hoặc clean và chạy test
 mvn clean test
 ```
-
 #### 3. Compile code
 ```bash
 # Compile source code
@@ -83,10 +82,9 @@ mvn compile
 # Compile cả source và test
 mvn test-compile
 ```
+###  Mô tả một số Test Cases
 
-### 🧪 Mô tả Test Cases
-
-Dự án bao gồm **23 test cases** được chia thành 3 nhóm chính:
+Dự án bao gồm **23 test cases** được chia thành 3 nhóm chính: **Normal Cases** (trường hợp bình thường), **Boundary Cases** (trường hợp biên), và **Exception Cases** (trường hợp ngoại lệ).
 
 #### **A. Test cho `countExcellentStudents()` - 11 test cases**
 
@@ -96,57 +94,27 @@ Dự án bao gồm **23 test cases** được chia thành 3 nhóm chính:
   - Expected: `2` (chỉ đếm 9.0 và 8.5)
   - Mục đích: Kiểm tra xử lý hỗn hợp điểm hợp lệ và không hợp lệ
 
-- `testCountExcellentStudents_AllValid`
-  - Input: `[9.5, 8.0, 7.5, 8.5, 6.0]`
-  - Expected: `3` (đếm 9.5, 8.0, 8.5)
-  - Mục đích: Kiểm tra với tất cả điểm hợp lệ
-
 ##### 2. **Trường hợp biên** (Boundary Cases)
 - `testCountExcellentStudents_EmptyList`
   - Input: `[]` (danh sách trống)
   - Expected: `0`
   - Mục đích: Xử lý danh sách rỗng
 
-- `testCountExcellentStudents_NullList`
-  - Input: `null`
-  - Expected: `0`
-  - Mục đích: Xử lý danh sách null
-
-- `testCountExcellentStudents_OnlyZeros`
-  - Input: `[0.0, 0.0, 0.0]`
-  - Expected: `0`
-  - Mục đích: Kiểm tra điểm 0 (biên dưới)
-
-- `testCountExcellentStudents_OnlyTens`
-  - Input: `[10.0, 10.0, 10.0]`
-  - Expected: `3`
-  - Mục đích: Kiểm tra điểm 10 (biên trên)
-
 - `testCountExcellentStudents_ExactlyEight`
   - Input: `[8.0, 7.9, 8.1]`
   - Expected: `2` (8.0 và 8.1 là giỏi, 7.9 không phải)
-  - Mục đích: Kiểm tra ngưỡng điểm giỏi chính xác
+  - Mục đích: Kiểm tra ngưỡng điểm giỏi chính xác tại 8.0
 
 ##### 3. **Trường hợp ngoại lệ** (Exception Cases)
-- `testCountExcellentStudents_WithNegativeScores`
-  - Input: `[-5.0, 8.5, -1.0]`
+- `testCountExcellentStudents_WithNullValues`
+  - Input: `[9.0, null, 8.5, null]`
   - Expected: `2`
-  - Mục đích: Bỏ qua điểm âm
-
-- `testCountExcellentStudents_WithScoresAboveTen`
-  - Input: `[9.0, 15.0, 8.5, 100.0]`
-  - Expected: `2`
-  - Mục đích: Bỏ qua điểm > 10
+  - Mục đích: Bỏ qua giá trị null trong danh sách
 
 - `testCountExcellentStudents_AllInvalid`
   - Input: `[-1.0, 11.0, -5.0, 20.0]`
   - Expected: `0`
   - Mục đích: Tất cả điểm không hợp lệ
-
-- `testCountExcellentStudents_WithNullValues`
-  - Input: `[9.0, null, 8.5, null]`
-  - Expected: `2`
-  - Mục đích: Bỏ qua giá trị null trong danh sách
 
 #### **B. Test cho `calculateValidAverage()` - 12 test cases**
 
@@ -156,62 +124,29 @@ Dự án bao gồm **23 test cases** được chia thành 3 nhóm chính:
   - Expected: `8.17` (trung bình của 9.0, 8.5, 7.0)
   - Mục đích: Tính trung bình chỉ với điểm hợp lệ
 
-- `testCalculateValidAverage_AllValid`
-  - Input: `[10.0, 8.0, 6.0]`
-  - Expected: `8.0`
-  - Mục đích: Tất cả điểm hợp lệ
-
 ##### 2. **Trường hợp biên** (Boundary Cases)
-- `testCalculateValidAverage_EmptyList`
-  - Input: `[]`
-  - Expected: `0.0`
-  - Mục đích: Danh sách rỗng
-
 - `testCalculateValidAverage_NullList`
   - Input: `null`
   - Expected: `0.0`
-  - Mục đích: Danh sách null
-
-- `testCalculateValidAverage_OnlyZeros`
-  - Input: `[0.0, 0.0, 0.0]`
-  - Expected: `0.0`
-  - Mục đích: Trung bình các số 0
-
-- `testCalculateValidAverage_OnlyTens`
-  - Input: `[10.0, 10.0, 10.0]`
-  - Expected: `10.0`
-  - Mục đích: Trung bình các số 10
+  - Mục đích: Xử lý danh sách null
 
 - `testCalculateValidAverage_BoundaryValues`
   - Input: `[0.0, 10.0]`
   - Expected: `5.0`
-  - Mục đích: Kiểm tra cả hai biên
+  - Mục đích: Kiểm tra cả hai giá trị biên (0 và 10)
 
 ##### 3. **Trường hợp ngoại lệ** (Exception Cases)
-- `testCalculateValidAverage_WithNegativeScores`
-  - Input: `[10.0, -5.0, 8.0, -1.0]`
-  - Expected: `9.0` (trung bình của 10.0 và 8.0)
-  - Mục đích: Bỏ qua điểm âm
-
-- `testCalculateValidAverage_WithScoresAboveTen`
-  - Input: `[10.0, 15.0, 8.0, 100.0]`
-  - Expected: `9.0`
-  - Mục đích: Bỏ qua điểm > 10
-
 - `testCalculateValidAverage_AllInvalid`
   - Input: `[-1.0, 11.0, -5.0, 20.0]`
   - Expected: `0.0`
-  - Mục đích: Không có điểm hợp lệ nào
+  - Mục đích: Không có điểm hợp lệ nào, tránh chia cho 0
 
 - `testCalculateValidAverage_WithNullValues`
   - Input: `[10.0, null, 8.0, null]`
   - Expected: `9.0`
-  - Mục đích: Bỏ qua null values
+  - Mục đích: Bỏ qua null values khi tính trung bình
 
-- `testCalculateValidAverage_SingleValidScore`
-  - Input: `[7.5]`
-  - Expected: `7.5`
-  - Mục đích: Chỉ có một điểm hợp lệ
+**Lưu ý:** Đây chỉ là một số test cases tiêu biểu. Xem file `StudentAnalyzerTest.java` để biết đầy đủ 23 test cases.
 
 ### Kết quả Test
 
