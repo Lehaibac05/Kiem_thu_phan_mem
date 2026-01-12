@@ -12,12 +12,14 @@ Repository này dùng để lưu trữ bài tập, tài liệu và project của
 - `README.md`: File dùng để mô tả các bài tập, bài toán, cách chạy chương trình, kết quả test, ...
 
 ## Các bài tập
-## Bài tập 1 (ex_1):
-    - Mô tả: Kết quả sau khi làm bài tập thực hành với https://cantunsee.space/
-    - Tổng điểm: 8130
-    - Rank: Master
+## Bài tập 1 (ex_1): Trải nghiệm kiểm thử giao diện với CantUnsee
+  - Mô tả: Kết quả sau khi làm bài tập thực hành với https://cantunsee.space/
+  - Tổng điểm: 8130
+  - Rank: Master
+  - Hình ảnh minh chứng:
+    ![Can't_Unsee_Image](assignments/ex_1/cantunsee.png)
 
-## Bài tập 2 (ex_2): Student Analyzer
+## Bài tập 2 (ex_2): Phân tích dữ liệu điểm số học sinh với JUnit
 
 ### Mô tả bài toán
 
@@ -32,12 +34,6 @@ Xây dựng hệ thống phân tích điểm số học sinh với hai chức n�
    - Nhận vào: Danh sách điểm số (List<Double>)
    - Điều kiện: Chỉ tính các điểm hợp lệ từ 0-10
    - Trả về: Điểm trung bình của các điểm hợp lệ
-
-**Yêu cầu xử lý:**
-- Bỏ qua các điểm không hợp lệ (< 0 hoặc > 10)
-- Bỏ qua các giá trị null
-- Xử lý danh sách rỗng hoặc null
-- Tránh lỗi chia cho 0
 
 ### Công nghệ sử dụng
 
@@ -82,72 +78,6 @@ mvn compile
 # Compile cả source và test
 mvn test-compile
 ```
-###  Mô tả một số Test Cases
-
-Dự án bao gồm **23 test cases** được chia thành 3 nhóm chính: **Normal Cases** (trường hợp bình thường), **Boundary Cases** (trường hợp biên), và **Exception Cases** (trường hợp ngoại lệ).
-
-#### **A. Test cho `countExcellentStudents()` - 11 test cases**
-
-##### 1. **Trường hợp bình thường** (Normal Cases)
-- `testCountExcellentStudents_MixedValidAndInvalid`
-  - Input: `[9.0, 8.5, 7.0, 11.0, -1.0]`
-  - Expected: `2` (chỉ đếm 9.0 và 8.5)
-  - Mục đích: Kiểm tra xử lý hỗn hợp điểm hợp lệ và không hợp lệ
-
-##### 2. **Trường hợp biên** (Boundary Cases)
-- `testCountExcellentStudents_EmptyList`
-  - Input: `[]` (danh sách trống)
-  - Expected: `0`
-  - Mục đích: Xử lý danh sách rỗng
-
-- `testCountExcellentStudents_ExactlyEight`
-  - Input: `[8.0, 7.9, 8.1]`
-  - Expected: `2` (8.0 và 8.1 là giỏi, 7.9 không phải)
-  - Mục đích: Kiểm tra ngưỡng điểm giỏi chính xác tại 8.0
-
-##### 3. **Trường hợp ngoại lệ** (Exception Cases)
-- `testCountExcellentStudents_WithNullValues`
-  - Input: `[9.0, null, 8.5, null]`
-  - Expected: `2`
-  - Mục đích: Bỏ qua giá trị null trong danh sách
-
-- `testCountExcellentStudents_AllInvalid`
-  - Input: `[-1.0, 11.0, -5.0, 20.0]`
-  - Expected: `0`
-  - Mục đích: Tất cả điểm không hợp lệ
-
-#### **B. Test cho `calculateValidAverage()` - 12 test cases**
-
-##### 1. **Trường hợp bình thường** (Normal Cases)
-- `testCalculateValidAverage_MixedValidAndInvalid`
-  - Input: `[9.0, 8.5, 7.0, 11.0, -1.0]`
-  - Expected: `8.17` (trung bình của 9.0, 8.5, 7.0)
-  - Mục đích: Tính trung bình chỉ với điểm hợp lệ
-
-##### 2. **Trường hợp biên** (Boundary Cases)
-- `testCalculateValidAverage_NullList`
-  - Input: `null`
-  - Expected: `0.0`
-  - Mục đích: Xử lý danh sách null
-
-- `testCalculateValidAverage_BoundaryValues`
-  - Input: `[0.0, 10.0]`
-  - Expected: `5.0`
-  - Mục đích: Kiểm tra cả hai giá trị biên (0 và 10)
-
-##### 3. **Trường hợp ngoại lệ** (Exception Cases)
-- `testCalculateValidAverage_AllInvalid`
-  - Input: `[-1.0, 11.0, -5.0, 20.0]`
-  - Expected: `0.0`
-  - Mục đích: Không có điểm hợp lệ nào, tránh chia cho 0
-
-- `testCalculateValidAverage_WithNullValues`
-  - Input: `[10.0, null, 8.0, null]`
-  - Expected: `9.0`
-  - Mục đích: Bỏ qua null values khi tính trung bình
-
-**Lưu ý:** Đây chỉ là một số test cases tiêu biểu. Xem file `StudentAnalyzerTest.java` để biết đầy đủ 23 test cases.
-
 ### Kết quả Test
 
 ```
@@ -162,4 +92,74 @@ Dự án bao gồm **23 test cases** được chia thành 3 nhóm chính: **Norm
 [INFO]
 [INFO] BUILD SUCCESS
 ```
+## Bài tập 3 (ex_3): Kiểm thử tự động End-to-End với Cypress
+
+### Mục tiêu
+- Hiểu và thực hành các kịch bản kiểm thử tự động end-to-end phổ biến bằng cách sử dụng Cypress để kiểm tra một trang web mẫu.
+
+### Công nghệ sử dụng
+- **Ngôn ngữ**: JavaScript
+- **Framework**: Cypress
+- **IDE**: Visual Studio Code
+- **Trang web**: https://www.saucedemo.com/ (trang web bán hàng giả)
+
+### Cấu trúc dự án
+```
+assignments/ex_3/
+├── cypress-exercise/                # Dự án Cypress
+│   ├── cypress/                     # Chứa các file test
+│   │   ├── fixtures/                # Chứa các file dữ liệu
+│   │   ├── integration/             # Chứa các file test
+│   │   ├── plugins/                 # Chứa các file plugin
+
+```
+### Kịch bản kiểm thử
+
+#### **Kịch bản 1: Kiểm tra đăng nhập thành công** 
+
+**Mục tiêu:** Kiểm tra xem người dùng có thể đăng nhập thành công với thông tin hợp lệ.
+
+**Các bước thực hiện:**
+1. Truy cập trang https://www.saucedemo.com
+2. Nhập tên người dùng: `standard_user`
+3. Nhập mật khẩu: `secret_sauce`
+4. Nhấn nút **"Login"**
+5. **Xác minh:** Trang được chuyển hướng đến trang danh sách sản phẩm (URL chứa `/inventory.html`)
+
+---
+
+#### **Kịch bản 2: Kiểm tra đăng nhập thất bại** 
+
+**Mục tiêu:** Kiểm tra xem hệ thống hiển thị thông báo lỗi khi đăng nhập với thông tin không hợp lệ.
+
+**Các bước thực hiện:**
+1. Truy cập trang https://www.saucedemo.com
+2. Nhập tên người dùng: `invalid_user`
+3. Nhập mật khẩu: `wrong_password`
+4. Nhấn nút **"Login"**
+5. **Xác minh:** Thông báo lỗi được hiển thị với nội dung: *"Username and password do not match"*
+
+---
+
+#### **Kịch bản 3: Kiểm tra chức năng thêm sản phẩm vào giỏ hàng** 
+
+**Mục tiêu:** Kiểm tra xem người dùng có thể thêm một sản phẩm vào giỏ hàng sau khi đăng nhập.
+
+**Các bước thực hiện:**
+1. Đăng nhập với thông tin hợp lệ (`standard_user` / `secret_sauce`)
+2. Nhấn nút **"Add to cart"** của sản phẩm đầu tiên trong danh sách
+3. **Xác minh:** Số lượng sản phẩm trong giỏ hàng hiển thị là **1**
+
+---
+
+#### **Kịch bản 4: Kiểm tra chức năng lọc sản phẩm** 
+
+**Mục tiêu:** Kiểm tra xem bộ lọc sản phẩm hoạt động đúng khi chọn "Price (low to high)".
+
+**Các bước thực hiện:**
+1. Đăng nhập với thông tin hợp lệ
+2. Chọn bộ lọc **"Price (low to high)"** từ dropdown
+3. **Xác minh:** Sản phẩm đầu tiên trong danh sách có giá thấp nhất
+
+---
 
