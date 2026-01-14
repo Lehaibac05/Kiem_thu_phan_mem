@@ -15,7 +15,7 @@ public class StudentAnalyzerTest {
         analyzer = new StudentAnalyzer();
     }
     
-    // ========== Test cho countExcellentStudents() ==========
+    // Test cho countExcellentStudents() 
     
     /**
      * Test trường hợp bình thường: danh sách có điểm hợp lệ và không hợp lệ
@@ -78,7 +78,7 @@ public class StudentAnalyzerTest {
     }
     
     /**
-     * Test trường hợp biên: điểm chính xác 8.0 (ngưỡng giỏi)
+     * Test trường hợp biên: điểm chính xác 8.0 (giỏi)
      */
     @Test
     public void testCountExcellentStudents_ExactlyEight() {
@@ -128,7 +128,7 @@ public class StudentAnalyzerTest {
     }
     
 
-    // ========== Test cho calculateValidAverage() ==========
+    // Test cho calculateValidAverage() 
 
     @Test
     public void testCalculateValidAverage_MixedValidAndInvalid() {
