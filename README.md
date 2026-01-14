@@ -18,7 +18,8 @@ Repository này dùng để lưu trữ bài tập, tài liệu và project của
   - Tổng điểm: 8130
   - Rank: Master
   - Hình ảnh minh chứng:
-    ![Can't_Unsee_Image](assignments/ex_1/cantunsee.png)
+    <img width="1920" height="1080" alt="Screenshot (201)" src="https://github.com/user-attachments/assets/951e74a4-68b1-469f-9934-abf6825be4ff" />
+
 
 ## Bài tập 2 (ex_2): Phân tích dữ liệu điểm số học sinh với JUnit
 
