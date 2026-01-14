@@ -9,6 +9,7 @@ Repository này dùng để lưu trữ bài tập, tài liệu và project của
 
 ## Cấu trúc repository
 - `assignments`: Chứa các bài tập 
+- `videos`: Chứa các video minh chứng cho các bài tập
 - `README.md`: File dùng để mô tả các bài tập, bài toán, cách chạy chương trình, kết quả test, ...
 
 ## Các bài tập
