@@ -86,7 +86,47 @@ public class StudentAnalyzerTest {
         assertEquals(2, analyzer.countExcellentStudents(scores),
             "Điểm 8.0 trở lên là giỏi, 7.9 không phải");
     }
-    
+
+    /**
+     * Test BVA nâng cao: giá trị sát biên dưới của ngưỡng giỏi (7.99)
+     */
+    @Test
+    public void testCountExcellentStudents_NearBoundary_7_99() {
+        List<Double> scores = Arrays.asList(7.99, 8.0, 8.01);
+        assertEquals(2, analyzer.countExcellentStudents(scores),
+            "7.99 không phải giỏi, 8.0 và 8.01 là giỏi");
+    }
+
+    /**
+     * Test BVA nâng cao: giá trị sát biên trên của ngưỡng giỏi (8.01)
+     */
+    @Test
+    public void testCountExcellentStudents_NearBoundary_8_01() {
+        List<Double> scores = Arrays.asList(7.98, 7.99, 8.00, 8.01, 8.02);
+        assertEquals(3, analyzer.countExcellentStudents(scores),
+            "Chỉ 8.00, 8.01, 8.02 là giỏi");
+    }
+
+    /**
+     * Test BVA nâng cao: giá trị sát biên dưới của điểm hợp lệ (0.01, -0.01)
+     */
+    @Test
+    public void testCountExcellentStudents_NearBoundary_Zero() {
+        List<Double> scores = Arrays.asList(-0.01, 0.0, 0.01, 8.5);
+        assertEquals(1, analyzer.countExcellentStudents(scores),
+            "Chỉ 8.5 là giỏi, -0.01 không hợp lệ, 0.0 và 0.01 hợp lệ nhưng không giỏi");
+    }
+
+    /**
+     * Test BVA nâng cao: giá trị sát biên trên của điểm hợp lệ (9.99, 10.0, 10.01)
+     */
+    @Test
+    public void testCountExcellentStudents_NearBoundary_Ten() {
+        List<Double> scores = Arrays.asList(9.99, 10.0, 10.01);
+        assertEquals(2, analyzer.countExcellentStudents(scores),
+            "9.99 và 10.0 là giỏi, 10.01 không hợp lệ");
+    }
+
     /**
      * Test trường hợp ngoại lệ: có điểm âm
      */
@@ -196,7 +236,51 @@ public class StudentAnalyzerTest {
         assertEquals(5.0, analyzer.calculateValidAverage(scores), 0.01,
             "Trung bình của 0.0 và 10.0 là 5.0");
     }
-    
+
+    /**
+     * Test BVA nâng cao: giá trị sát biên dưới của điểm hợp lệ (-0.01, 0.0, 0.01)
+     */
+    @Test
+    public void testCalculateValidAverage_NearBoundary_Zero() {
+        List<Double> scores = Arrays.asList(-0.01, 0.0, 0.01, 5.0);
+        // Chỉ 0.0, 0.01, 5.0 hợp lệ => (0.0 + 0.01 + 5.0) / 3 = 1.67
+        assertEquals(1.67, analyzer.calculateValidAverage(scores), 0.01,
+            "Bỏ qua -0.01, trung bình của 0.0, 0.01, 5.0 là 1.67");
+    }
+
+    /**
+     * Test BVA nâng cao: giá trị sát biên trên của điểm hợp lệ (9.99, 10.0, 10.01)
+     */
+    @Test
+    public void testCalculateValidAverage_NearBoundary_Ten() {
+        List<Double> scores = Arrays.asList(9.99, 10.0, 10.01);
+        // Chỉ 9.99 và 10.0 hợp lệ => (9.99 + 10.0) / 2 = 9.995
+        assertEquals(9.995, analyzer.calculateValidAverage(scores), 0.01,
+            "Bỏ qua 10.01, trung bình của 9.99 và 10.0 là 9.995");
+    }
+
+    /**
+     * Test BVA nâng cao: kết hợp nhiều giá trị sát biên
+     */
+    @Test
+    public void testCalculateValidAverage_MultipleNearBoundaries() {
+        List<Double> scores = Arrays.asList(-0.01, 0.0, 0.01, 9.99, 10.0, 10.01);
+        // Hợp lệ: 0.0, 0.01, 9.99, 10.0 => (0.0 + 0.01 + 9.99 + 10.0) / 4 = 5.0
+        assertEquals(5.0, analyzer.calculateValidAverage(scores), 0.01,
+            "Trung bình của 0.0, 0.01, 9.99, 10.0 là 5.0");
+    }
+
+    /**
+     * Test BVA nâng cao: độ chính xác số thực với nhiều chữ số thập phân
+     */
+    @Test
+    public void testCalculateValidAverage_FloatingPointPrecision() {
+        List<Double> scores = Arrays.asList(7.999999, 8.000000, 8.000001);
+        // Tất cả hợp lệ => (7.999999 + 8.0 + 8.000001) / 3 = 8.0
+        assertEquals(8.0, analyzer.calculateValidAverage(scores), 0.000001,
+            "Trung bình với độ chính xác cao");
+    }
+
     /**
      * Test trường hợp ngoại lệ: có điểm âm
      */
