@@ -9,6 +9,7 @@ Repository này dùng để lưu trữ bài tập, tài liệu và project của
 
 ## Cấu trúc repository
 - `assignments`: Chứa các bài tập 
+- `image`: Chứa các hình ảnh minh chứng cho các bài tập
 - `videos`: Chứa các video minh chứng cho các bài tập
 - `README.md`: File dùng để mô tả các bài tập, bài toán, cách chạy chương trình, kết quả test, ...
 
@@ -116,107 +117,9 @@ mvn test -Dtest=StudentAnalyzerTest#testCountExcellentStudents_MixedValidAndInva
 [INFO] BUILD SUCCESS
 ```
 
-**Tổng kết:**
--  **Tổng số test:** 31 (23 test cơ bản + 8 test BVA nâng cao)
--  **Thành công:** 31
--  **Thất bại:** 0
--  **Lỗi:** 0
--  **Bỏ qua:** 0
--  **Tỷ lệ thành công:** 100%
-
-### Mô tả một số Test Cases tiêu biểu
-
-Dự án bao gồm **31 test cases** được chia thành 4 nhóm chính:
-- **Normal Cases** (Trường hợp bình thường)
-- **Boundary Cases** (Trường hợp biên)
-- **Exception Cases** (Trường hợp ngoại lệ)
-- **BVA Advanced** (Boundary Value Analysis nâng cao - 8 test cases mới)
-
-#### **A. Test cho `countExcellentStudents()` - 15 test cases (11 cơ bản + 4 BVA nâng cao)**
-
-##### 1. Trường hợp bình thường (Normal Cases)
-  - `testCountExcellentStudents_MixedValidAndInvalid`
-  - **Đầu vào:** `[9.0, 8.5, 7.0, 11.0, -1.0]`
-  - **Kết quả mong đợi:** `2` (chỉ đếm 9.0 và 8.5)
-  - **Mục đích:** Kiểm tra xử lý hỗn hợp điểm hợp lệ và không hợp lệ
-
-##### 2. Trường hợp biên (Boundary Cases)
-  - `testCountExcellentStudents_EmptyList`
-  - **Đầu vào:** `[]` (danh sách trống)
-  - **Kết quả mong đợi:** `0`
-  - **Mục đích:** Xử lý danh sách rỗng
-
-  - `testCountExcellentStudents_ExactlyEight`
-  - **Đầu vào:** `[8.0, 7.9, 8.1]`
-  - **Kết quả mong đợi:** `2` (8.0 và 8.1 là giỏi, 7.9 không phải)
-  - **Mục đích:** Kiểm tra ngưỡng điểm giỏi chính xác tại 8.0
-
-##### 3. Trường hợp ngoại lệ (Exception Cases)
-  - `testCountExcellentStudents_WithNullValues`
-  - **Đầu vào:** `[9.0, null, 8.5, null]`
-  - **Kết quả mong đợi:** `2`
-  - **Mục đích:** Bỏ qua giá trị null trong danh sách
-
-  - `testCountExcellentStudents_AllInvalid`
-  - **Đầu vào:** `[-1.0, 11.0, -5.0, 20.0]`
-  - **Kết quả mong đợi:** `0`
-  - **Mục đích:** Tất cả điểm không hợp lệ
-
-#### **B. Test cho `calculateValidAverage()` - 16 test cases (12 cơ bản + 4 BVA nâng cao)**
-
-##### 1. Trường hợp bình thường (Normal Cases)
-  - `testCalculateValidAverage_MixedValidAndInvalid`
-  - **Đầu vào:** `[9.0, 8.5, 7.0, 11.0, -1.0]`
-  - **Kết quả mong đợi:** `8.17` (trung bình của 9.0, 8.5, 7.0)
-  - **Mục đích:** Tính trung bình chỉ với điểm hợp lệ
-
-##### 2. Trường hợp biên (Boundary Cases)
-  - `testCalculateValidAverage_NullList`
-  - **Đầu vào:** `null`
-  - **Kết quả mong đợi:** `0.0`
-  - **Mục đích:** Xử lý danh sách null
-
-  - `testCalculateValidAverage_BoundaryValues`
-  - **Đầu vào:** `[0.0, 10.0]`
-  - **Kết quả mong đợi:** `5.0`
-  - **Mục đích:** Kiểm tra cả hai giá trị biên (0 và 10)
-
-##### 3. Trường hợp ngoại lệ (Exception Cases)
-  - `testCalculateValidAverage_AllInvalid`
-  - **Đầu vào:** `[-1.0, 11.0, -5.0, 20.0]`
-  - **Kết quả mong đợi:** `0.0`
-  - **Mục đích:** Không có điểm hợp lệ nào, tránh chia cho 0
-
-  - `testCalculateValidAverage_WithNullValues`
-  - **Đầu vào:** `[10.0, null, 8.0, null]`
-  - **Kết quả mong đợi:** `9.0`
-  - **Mục đích:** Bỏ qua null values khi tính trung bình
-
-#### **C. Test BVA Nâng Cao - 8 test cases mới** 
-
-Để đạt mức **Boundary Value Analysis nâng cao**, đã bổ sung thêm các test với **giá trị sát biên** (near-boundary values):
-
-##### 1. Giá trị sát biên cho ngưỡng giỏi (8.0)
-  - `testCountExcellentStudents_NearBoundary_7_99`
-  - **Đầu vào:** `[7.99, 8.0, 8.01]`
-  - **Kết quả mong đợi:** `2` (7.99 không giỏi, 8.0 và 8.01 là giỏi)
-  - **Mục đích:** Kiểm tra so sánh số thực tại ngưỡng 8.0
-
-##### 2. Giá trị sát biên cho điểm hợp lệ (0 và 10)
-  - `testCountExcellentStudents_NearBoundary_Zero`
-  - **Đầu vào:** `[-0.01, 0.0, 0.01, 8.5]`
-  - **Kết quả mong đợi:** `1` (chỉ 8.5 là giỏi)
-
-  - `testCountExcellentStudents_NearBoundary_Ten`
-  - **Đầu vào:** `[9.99, 10.0, 10.01]`
-  - **Kết quả mong đợi:** `2` (10.01 không hợp lệ)
-
-##### 3. Độ chính xác số thực
-  - `testCalculateValidAverage_FloatingPointPrecision`
-  - **Đầu vào:** `[7.999999, 8.000000, 8.000001]`
-  - **Kết quả mong đợi:** `8.0` (với delta = 0.000001)
-  - **Mục đích:** Kiểm tra độ chính xác cao của số thực
-
+### Độ bao phủ
+#### Hình ảnh minh chứng: 
+<img width="1920" height="1080" alt="Screenshot (201)" src="/image/Độ bao phủ.png" />
 
 ---
 ## Bài tập 3 (ex_3): Kiểm thử tự động End-to-End với Cypress
